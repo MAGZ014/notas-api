@@ -45,7 +45,7 @@ public class UserModel {
 
     @ManyToOne
     @JoinColumn(name = "rol_id", nullable = true)
-    private RolModel role;
+    private RoleModel role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NoteModel> note;
