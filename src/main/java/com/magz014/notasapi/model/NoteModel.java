@@ -11,7 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "notes")
+@Table(name = "note")
 public class NoteModel {
 
     @Id
@@ -24,7 +24,8 @@ public class NoteModel {
     @Column(nullable = false, length = 500)
     private String description;
 
-    private boolean check;
+    @Column(name = "is_checked", nullable = false)
+    private Boolean check;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "color_note",nullable = false, length = 20)

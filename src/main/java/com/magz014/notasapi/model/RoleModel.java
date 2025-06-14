@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class RoleModel {
 
     @Id
@@ -19,7 +19,7 @@ public class RoleModel {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
-    private RolName rol;
+    private RolName role;
 
     public enum RolName {
         ADMIN, USER
