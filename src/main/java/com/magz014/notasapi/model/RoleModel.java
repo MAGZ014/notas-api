@@ -1,7 +1,9 @@
 package com.magz014.notasapi.model;
 
+import com.magz014.notasapi.enums.RoleName;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
@@ -9,22 +11,19 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "role")
 public class RoleModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
-    private RolName role;
-
-    public enum RolName {
-        ADMIN, USER
-    }
+    RoleName role;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserModel> users;
+    List<UserModel> users;
 }

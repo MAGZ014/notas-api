@@ -1,8 +1,9 @@
 package com.magz014.notasapi.model;
-
+import com.magz014.notasapi.enums.Colors;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -10,40 +11,37 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "note")
 public class NoteModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @Column(nullable = false, length = 100)
-    private String title;
+    String title;
 
     @Column(nullable = false, length = 500)
-    private String description;
+    String description;
 
     @Column(name = "is_checked", nullable = false)
-    private Boolean check;
+    boolean check;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "color_note",nullable = false, length = 20)
-    private Colors colorNote;
-
-    public enum Colors {
-        VERDE, AZUL, ROJO, AMARILLO, MORADO, BLANCO, GRIS
-    }
+    Colors colorNote;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
-    private UserModel user;
+    UserModel user;
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,41 +13,42 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "user")
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @Column(nullable = false, length = 50)
-    private String username;
+    String username;
 
     @Column(nullable = false, length = 100)
-    private String name;
+    String name;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    String email;
 
     @Column(nullable = false, length = 18)
-    private String phone;
+    String phone;
 
     @Column(nullable = false)
-    private String password;
+    String password;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "rol_id", nullable = true)
-    private RoleModel role;
+    RoleModel role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<NoteModel> note;
+    List<NoteModel> note;
 }
