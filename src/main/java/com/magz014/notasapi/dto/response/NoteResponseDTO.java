@@ -1,24 +1,24 @@
 package com.magz014.notasapi.dto.response;
 
 import com.magz014.notasapi.model.NoteModel;
-import lombok.Getter;
+import lombok.Value;
 
-@Getter
+@Value
 public class NoteResponseDTO {
 
-    private Long id;
-    private String title;
-    private String description;
-    private Boolean check;
-    private String colorNote;
-    private Long userId;
-    private String username;
+    Long id;
+    String title;
+    String description;
+    boolean check;
+    String colorNote;
+    Long userId;
+    String username;
 
     public NoteResponseDTO(NoteModel noteModel){
         this.id = noteModel.getId();
         this.title = noteModel.getTitle();
         this.description = noteModel.getDescription();
-        this.check = noteModel.getCheck();
+        this.check = noteModel.isCheck();
         this.colorNote = noteModel.getColorNote().name();
         this.userId = noteModel.getUser().getId();
         this.username = noteModel.getUser().getUsername();

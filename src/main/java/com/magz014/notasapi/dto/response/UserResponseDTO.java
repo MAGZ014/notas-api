@@ -1,23 +1,21 @@
 package com.magz014.notasapi.dto.response;
 
-import com.magz014.notasapi.model.RoleModel;
 import com.magz014.notasapi.model.UserModel;
-import lombok.Getter;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Value
 public class UserResponseDTO {
 
-    public  Long id;
-    private String name;
-    private String username;
-    private String email;
-    private String phone;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    private RoleDTO role;
+    Long id;
+    String name;
+    String username;
+    String email;
+    String phone;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    RoleResponseDTO role;
 
 
     public UserResponseDTO(UserModel userModel){
@@ -29,17 +27,9 @@ public class UserResponseDTO {
         this.createdAt = userModel.getCreatedAt();
         this.updatedAt= userModel.getUpdatedAt();
 
-        if (userModel.getRole() != null) {
-            this.role = new RoleDTO(userModel.getRole());
-        }
+        this.role = userModel.getRole() != null ?
+                new RoleResponseDTO(userModel.getRole()) :
+                null;
     }
 
-    @Getter
-    public static class RoleDTO{
-        private String role;
-
-        public RoleDTO(RoleModel roleModel){
-            this.role = roleModel.getRole().name();
-        }
-    }
 }
