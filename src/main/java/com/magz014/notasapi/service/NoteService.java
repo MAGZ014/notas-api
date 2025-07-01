@@ -1,6 +1,7 @@
 package com.magz014.notasapi.service;
 
 import com.magz014.notasapi.dto.request.NoteRequestDTO;
+import com.magz014.notasapi.enums.Colors;
 import com.magz014.notasapi.model.NoteModel;
 import com.magz014.notasapi.model.UserModel;
 import com.magz014.notasapi.repository.NoteRepository;
@@ -42,13 +43,14 @@ public class NoteService {
         note.setCheck(noteRequestDTO.getCheck());
 
         // Conversión segura de String a Enum
-        NoteModel.Colors color = NoteModel.Colors.valueOf(noteRequestDTO.getColorNote().toUpperCase());
+        Colors color = Colors.valueOf(noteRequestDTO.getColorNote().toUpperCase());
         note.setColorNote(color);
 
         note.setUser(user);
 
         return noteRepository.save(note);
     }
+
     //Actualizar nota
     public NoteModel updateNote(NoteRequestDTO noteRequestDTO, Long id) {
         NoteModel note = noteRepository.findById(id)
@@ -61,8 +63,8 @@ public class NoteService {
         note.setDescription(noteRequestDTO.getDescription());
         note.setCheck(noteRequestDTO.getCheck());
 
-        // Conversión segura de String a Enum
-        NoteModel.Colors color = NoteModel.Colors.valueOf(noteRequestDTO.getColorNote().toUpperCase());
+        Colors color = Colors.valueOf(noteRequestDTO.getColorNote().toUpperCase());
+        note.setColorNote(color);
 
         note.setUser(user);
 
